@@ -3,19 +3,19 @@
 #########################################################
 # Update the OS
 #########################################################
+printf "Updating system ..."
 apt-get -qq update
-printf "\n System updated \n"
 
 #########################################################
 # Remove Apache
 #########################################################
-apt-get remove -y -qq apache2*
-printf "\n Apache removed \n"
+printf "Removing Apache ..."
+apt-get remove -y apache2*
 
 #########################################################
 # Install PHP
 #########################################################
-printf "\n ################### PHP 7.2 ################## \n"
+printf "Installing PHP 7.2 ..."
 apt-get install -y -qq python-software-properties
 add-apt-repository -y ppa:ondrej/php
 apt-get -qq update
@@ -32,18 +32,18 @@ systemctl -q enable php7.2-fpm.service
 #########################################################
 # Install Nginx
 #########################################################
-printf "\n ################### Nginx ################## \n"
+printf "Installing Nginx ..."
 apt-get install -y -qq nginx
 cp /etc/nginx/sites-available/default default.backup
 wget -q https://raw.githubusercontent.com/mohokh67/Ubuntu-Essential-PHP/master/files/nginx.conf -O /etc/nginx/sites-available/default
 systemctl -q restart nginx
 systemctl -q enable nginx
-nginx -t
+#nginx -t
 
 #########################################################
 # Install Composer
 #########################################################
-printf "\n ################### Composer ################## \n"
+printf "Installing Composer ..."
 wget -q https://getcomposer.org/composer.phar
 mv composer.phar composer
 chmod +x composer
@@ -52,7 +52,7 @@ mv composer /usr/local/bin/
 #########################################################
 # Install Node.js
 #########################################################
-printf "\n ################### Node & NPM ################## \n"
+printf "Installing Node & NPM ..."
 curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
 apt-get install -y -qq nodejs
 apt-get install -y -qq build-essential
@@ -60,27 +60,17 @@ apt-get install -y -qq build-essential
 #########################################################
 # Clean up
 #########################################################
-printf "\n ################### Clean up ################## \n"
+printf "Clean up ..."
 apt-get -y autoremove
 apt-get -y autoclean
 
 #########################################################
 # Installed App version:
 #########################################################
-printf "\n ---------------------------------- Nginx version \n"
-nginx -v
-printf "\n ---------------------------------- PHP version \n"
-php --version
-printf "\n ---------------------------------- Composer version \n"
-composer --version
-printf "\n ---------------------------------- Node version \n"
-node --version
-printf "\n ---------------------------------- NPM version \n"
-npm --version
 
-printf "\n ---------------------------------------------------------- \n"
-printf "\n |                        Done                             |\n"
-printf "\n ---------------------------------------------------------- \n"
+printf "----------------------------------------------------------"
+printf "|                        Done                             |"
+printf "----------------------------------------------------------"
 
 printf "\n Welcome to the Ubuntu Xenial 26.04 LTS with Nginx, PHP7.2, Composer and Node.js"
 printf "\n View the development webiste in your browser 'http://localhost:8080'"

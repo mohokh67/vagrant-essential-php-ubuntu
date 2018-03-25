@@ -3,38 +3,41 @@
 #########################################################
 # Update the OS
 #########################################################
-apt-get -q update
+apt-get -qq update
 printf "\n System updated \n"
+
+#########################################################
+# Remove Apache
+#########################################################
+apt-get remove -y -qq apache2*
+printf "\n Apache removed \n"
 
 #########################################################
 # Install PHP
 #########################################################
 printf "\n ################### PHP 7.2 ################## \n"
-apt-get install -yq python-software-properties
-add-apt-repository -yq ppa:ondrej/php
-apt-get -q update
-apt-get install -yq php7.2
-apt-get install -yq php-pear php7.2-curl php7.2-dev php7.2-gd php7.2-mbstring php7.2-zip php7.2-mysql php7.2-xml php7.2-cli php7.2-common php7.2-json php7.2-opcache php7.2-fpm
+apt-get install -y -qq python-software-properties
+add-apt-repository -y ppa:ondrej/php
+apt-get -qq update
+apt-get install -y -qq php7.2
+apt-get install -y -qq php-pear php7.2-curl php7.2-dev php7.2-gd php7.2-mbstring php7.2-zip php7.2-mysql php7.2-xml php7.2-cli php7.2-common php7.2-json php7.2-opcache php7.2-fpm
 
 #update php.ini
 cp /etc/php/7.2/fpm/php.ini /etc/php/7.2/fpm/php.ini.backup
 sed -i -e 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' /etc/php/7.2/fpm/php.ini
 
-systemctl restart php7.2-fpm.service
-systemctl enable php7.2-fpm.service
+systemctl -q restart php7.2-fpm.service
+systemctl -q enable php7.2-fpm.service
 
 #########################################################
 # Install Nginx
 #########################################################
 printf "\n ################### Nginx ################## \n"
-apt-get remove -yq apache2*
-printf "\n Apache removed \n"
-
-apt-get install -yq nginx
+apt-get install -y -qq nginx
 cp /etc/nginx/sites-available/default default.backup
 wget -q https://raw.githubusercontent.com/mohokh67/Ubuntu-Essential-PHP/master/files/nginx.conf -O /etc/nginx/sites-available/default
-systemctl restart nginx
-systemctl enable nginx
+systemctl -q restart nginx
+systemctl -q enable nginx
 nginx -t
 
 #########################################################
@@ -51,8 +54,8 @@ mv composer /usr/local/bin/
 #########################################################
 printf "\n ################### Node & NPM ################## \n"
 curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
-apt-get install -yq nodejs
-apt-get install -yq build-essential
+apt-get install -y -qq nodejs
+apt-get install -y -qq build-essential
 
 #########################################################
 # Clean up

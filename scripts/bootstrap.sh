@@ -6,20 +6,10 @@
 apt-get update
 
 #########################################################
-# Install Nginx
-#########################################################
-apt-get install -y nginx
-cp /etc/nginx/sites-available/default default.backup
-wget -q https://raw.githubusercontent.com/mohokh67/Ubuntu-Essential-PHP/master/files/nginx.conf -O /etc/nginx/sites-available/default
-systemctl restart nginx
-systemctl enable nginx
-nginx -t
-
-#########################################################
 # Install PHP
 #########################################################
 apt-get install -y python-software-properties
-add-apt-repository ppa:ondrej/php
+add-apt-repository -y ppa:ondrej/php
 apt-get update
 apt-get install -y php7.2
 apt-get install -y php-pear php7.2-curl php7.2-dev php7.2-gd php7.2-mbstring php7.2-zip php7.2-mysql php7.2-xml php7.2-cli php7.2-common php7.2-json php7.2-opcache php7.2-fpm
@@ -30,6 +20,18 @@ sed -i -e 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' /etc/php/7.2/fpm/php.ini
 
 systemctl restart php7.2-fpm.service
 systemctl enable php7.2-fpm.service
+
+#########################################################
+# Install Nginx
+#########################################################
+apt-get remove -y apache2*
+
+apt-get install -y nginx
+cp /etc/nginx/sites-available/default default.backup
+wget -q https://raw.githubusercontent.com/mohokh67/Ubuntu-Essential-PHP/master/files/nginx.conf -O /etc/nginx/sites-available/default
+systemctl restart nginx
+systemctl enable nginx
+nginx -t
 
 #########################################################
 # Install Composer

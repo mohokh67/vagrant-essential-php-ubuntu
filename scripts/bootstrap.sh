@@ -8,6 +8,7 @@ apt-get update
 #########################################################
 # Install PHP
 #########################################################
+printf "\n ################### PHP 7.2 ################## \n"
 apt-get install -y python-software-properties
 add-apt-repository -y ppa:ondrej/php
 apt-get update
@@ -24,6 +25,7 @@ systemctl enable php7.2-fpm.service
 #########################################################
 # Install Nginx
 #########################################################
+printf "\n ################### Nginx ################## \n"
 apt-get remove -y apache2*
 
 apt-get install -y nginx
@@ -36,6 +38,7 @@ nginx -t
 #########################################################
 # Install Composer
 #########################################################
+printf "\n ################### Composer ################## \n"
 wget https://getcomposer.org/composer.phar
 mv composer.phar composer
 chmod +x composer
@@ -44,6 +47,7 @@ mv composer /usr/local/bin/
 #########################################################
 # Install Node.js
 #########################################################
+printf "\n ################### Node & NPM ################## \n"
 curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
 apt-get install -y nodejs
 apt-get install -y build-essential
@@ -51,17 +55,27 @@ apt-get install -y build-essential
 #########################################################
 # Clean up
 #########################################################
-apt-get autoremove
-apt-get autoclean
+printf "\n ################### Clean up ################## \n"
+apt-get -y autoremove
+apt-get -y autoclean
 
 #########################################################
 # Installed App version:
 #########################################################
+printf "\n ---------------------------------- Nginx version \n"
 nginx -v
+printf "\n ---------------------------------- PHP version \n"
 php --version
+printf "\n ---------------------------------- Composer version \n"
 composer --version
+printf "\n ---------------------------------- Node version \n"
 node --version
+printf "\n ---------------------------------- NPM version \n"
 npm --version
+
+printf "\n ---------------------------------------------------------- \n"
+printf "\n |                        Done                             |\n"
+printf "\n ---------------------------------------------------------- \n"
 
 printf "\n Welcome to the Ubuntu Xenial 26.04 LTS with Nginx, PHP7.2, Composer and Node.js"
 printf "\n View the development webiste in your browser 'http://localhost:8080'"

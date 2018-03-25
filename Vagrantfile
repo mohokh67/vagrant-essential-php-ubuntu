@@ -17,6 +17,12 @@ Vagrant.configure("2") do |config|
     source: "./provisionFile.txt",
     destination: "~/provisionFile.tx"
 
+  config.vm.provision :shell, path: "bootstrap.sh"
+
+  config.vm.provider :virtualbox do |vb|
+    vb.name = "Ubuntu-Xenial-PHP-Essential"
+  end
+
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.

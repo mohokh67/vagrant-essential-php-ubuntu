@@ -17,7 +17,7 @@ Because it is a vagrant box, you can run the machine with this command:
 vagrant up
 ```
 
-When the installation finished, you can view the local webserver in your favourite browser in `http://localhost:8080` address.
+When the installation finished, you can view the local webserver in your favourite browser in [http://localhost:8080](http://localhost:8080) address.
 
 # Other
 ## Private network IP
@@ -37,7 +37,7 @@ vagrant plugin list
 ```
 
 ## Two machines
-In order to have two boxes in one `Vagrantfile` you should fallow the following pattern.
+In order to have two boxes in one `Vagrantfile`, you should update the `vagrantfile` as bellow.
 ```
 Vagrant.configure("2") do |config|
     # These 2  lines will effect on both machines

@@ -10,7 +10,7 @@ apt-get -qq update
 # Remove Apache
 #########################################################
 printf "Removing Apache ..."
-service apache2 stop
+systemctl -q stop apache2.service
 apt-get remove -y apache2*
 
 #########################################################

@@ -3,17 +3,18 @@
 #########################################################
 # Update the OS
 #########################################################
-apt-get update
+apt-get -q update
+printf "\n System updated \n"
 
 #########################################################
 # Install PHP
 #########################################################
 printf "\n ################### PHP 7.2 ################## \n"
-apt-get install -y python-software-properties
-add-apt-repository -y ppa:ondrej/php
-apt-get update
-apt-get install -y php7.2
-apt-get install -y php-pear php7.2-curl php7.2-dev php7.2-gd php7.2-mbstring php7.2-zip php7.2-mysql php7.2-xml php7.2-cli php7.2-common php7.2-json php7.2-opcache php7.2-fpm
+apt-get install -yq python-software-properties
+add-apt-repository -yq ppa:ondrej/php
+apt-get -q update
+apt-get install -yq php7.2
+apt-get install -yq php-pear php7.2-curl php7.2-dev php7.2-gd php7.2-mbstring php7.2-zip php7.2-mysql php7.2-xml php7.2-cli php7.2-common php7.2-json php7.2-opcache php7.2-fpm
 
 #update php.ini
 cp /etc/php/7.2/fpm/php.ini /etc/php/7.2/fpm/php.ini.backup
@@ -26,9 +27,10 @@ systemctl enable php7.2-fpm.service
 # Install Nginx
 #########################################################
 printf "\n ################### Nginx ################## \n"
-apt-get remove -y apache2*
+apt-get remove -yq apache2*
+printf "\n Apache removed \n"
 
-apt-get install -y nginx
+apt-get install -yq nginx
 cp /etc/nginx/sites-available/default default.backup
 wget -q https://raw.githubusercontent.com/mohokh67/Ubuntu-Essential-PHP/master/files/nginx.conf -O /etc/nginx/sites-available/default
 systemctl restart nginx
@@ -39,7 +41,7 @@ nginx -t
 # Install Composer
 #########################################################
 printf "\n ################### Composer ################## \n"
-wget https://getcomposer.org/composer.phar
+wget -q https://getcomposer.org/composer.phar
 mv composer.phar composer
 chmod +x composer
 mv composer /usr/local/bin/
@@ -49,8 +51,8 @@ mv composer /usr/local/bin/
 #########################################################
 printf "\n ################### Node & NPM ################## \n"
 curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
-apt-get install -y nodejs
-apt-get install -y build-essential
+apt-get install -yq nodejs
+apt-get install -yq build-essential
 
 #########################################################
 # Clean up

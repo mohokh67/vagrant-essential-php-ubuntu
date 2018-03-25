@@ -6,12 +6,7 @@
 printf "Updating system ..."
 apt-get -qq update
 
-#########################################################
-# Remove Apache
-#########################################################
-printf "Removing Apache ..."
-systemctl -q stop apache2.service
-apt-get remove -y apache2*
+
 
 #########################################################
 # Install PHP
@@ -29,6 +24,13 @@ sed -i -e 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' /etc/php/7.2/fpm/php.ini
 
 systemctl -q restart php7.2-fpm.service
 systemctl -q enable php7.2-fpm.service
+
+#########################################################
+# Remove Apache
+#########################################################
+printf "Removing Apache ..."
+service apache2 stop
+apt-get remove -y apache2*
 
 #########################################################
 # Install Nginx
@@ -64,14 +66,6 @@ apt-get install -y -qq build-essential
 printf "Clean up ..."
 apt-get -y autoremove
 apt-get -y autoclean
-
-#########################################################
-# Installed App version:
-#########################################################
-
-printf "----------------------------------------------------------"
-printf "|                        Done                             |"
-printf "----------------------------------------------------------"
 
 printf "\n Welcome to the Ubuntu Xenial 26.04 LTS with Nginx, PHP7.2, Composer and Node.js"
 printf "\n View the development webiste in your browser 'http://localhost:8080'"

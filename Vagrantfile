@@ -13,7 +13,7 @@ Vagrant.configure("2") do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
   config.vm.box = "ubuntu/xenial64"
-  config.vm.provision "file",
+  config.vm.provision :file,
     source: "./provisionFile.txt",
     destination: "~/provisionFile.tx"
 

@@ -17,8 +17,9 @@ Because it is a vagrant box, you can run the machine with this command:
 vagrant up
 ```
 
-When the installation finished, you can view the local webserver in your favourite browser in [http://localhost:8080](http://localhost:8080) address.
+When the installation finished, you can view the local webserver in your favourite browser in `http://localhost:8080` address.
 
+The **document root** will be in `www/public/` direcotry. Any change in your host will effect on the your virtual machine because of share directory.
 # Other
 ## Private network IP
 Following line make the current machine accessible from current network:

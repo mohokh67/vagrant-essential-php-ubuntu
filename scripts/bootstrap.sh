@@ -29,7 +29,7 @@ systemctl -q enable php7.2-fpm.service
 # Remove Apache
 #########################################################
 printf "Removing Apache ..."
-service apache2 stop
+systemctl stop apache2.service
 apt-get remove -y apache2*
 
 #########################################################

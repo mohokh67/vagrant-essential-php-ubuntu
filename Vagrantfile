@@ -17,6 +17,9 @@ Vagrant.configure("2") do |config|
 
   config.vm.network "forwarded_port", guest: 80, host: 8080
 
-  config.vbguest.auto_update = false
+  # Prevent Virtual box guest addition for auto update
+  # check if the plugin has already installed
+  # vagrant plugin list
+  #config.vbguest.auto_update = false
 
 end
